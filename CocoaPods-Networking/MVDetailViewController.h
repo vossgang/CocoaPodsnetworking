@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Song.h"
 
 @interface MVDetailViewController : UIViewController <UISplitViewControllerDelegate>
 
-@property (strong, nonatomic) id detailItem;
+@property (strong, nonatomic) Song *song;
 
 @property (weak, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
 @end

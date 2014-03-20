@@ -22,6 +22,7 @@
 		C97FB4F718D80615008E29DF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C97FB4D618D80615008E29DF /* UIKit.framework */; };
 		C97FB4FF18D80615008E29DF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C97FB4FD18D80615008E29DF /* InfoPlist.strings */; };
 		C97FB50118D80615008E29DF /* CocoaPods_NetworkingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C97FB50018D80615008E29DF /* CocoaPods_NetworkingTests.m */; };
+		C9CF1F1018DABD7000F6563A /* Song.m in Sources */ = {isa = PBXBuildFile; fileRef = C9CF1F0F18DABD7000F6563A /* Song.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,8 @@
 		C97FB4FC18D80615008E29DF /* CocoaPods-NetworkingTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CocoaPods-NetworkingTests-Info.plist"; sourceTree = "<group>"; };
 		C97FB4FE18D80615008E29DF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C97FB50018D80615008E29DF /* CocoaPods_NetworkingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CocoaPods_NetworkingTests.m; sourceTree = "<group>"; };
+		C9CF1F0E18DABD7000F6563A /* Song.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Song.h; sourceTree = "<group>"; };
+		C9CF1F0F18DABD7000F6563A /* Song.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Song.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +123,8 @@
 				C97FB4E418D80615008E29DF /* Main.storyboard */,
 				C97FB4E718D80615008E29DF /* MVMasterViewController.h */,
 				C97FB4E818D80615008E29DF /* MVMasterViewController.m */,
+				C9CF1F0E18DABD7000F6563A /* Song.h */,
+				C9CF1F0F18DABD7000F6563A /* Song.m */,
 				C97FB4EA18D80615008E29DF /* MVDetailViewController.h */,
 				C97FB4EB18D80615008E29DF /* MVDetailViewController.m */,
 				C97FB4ED18D80615008E29DF /* Images.xcassets */,
@@ -255,6 +260,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9CF1F1018DABD7000F6563A /* Song.m in Sources */,
 				C97FB4EC18D80615008E29DF /* MVDetailViewController.m in Sources */,
 				C97FB4DF18D80615008E29DF /* main.m in Sources */,
 				C97FB4E318D80615008E29DF /* MVAppDelegate.m in Sources */,
@@ -465,6 +471,7 @@
 				C97FB50618D80615008E29DF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C97FB50718D80615008E29DF /* Build configuration list for PBXNativeTarget "CocoaPods-NetworkingTests" */ = {
 			isa = XCConfigurationList;
@@ -473,6 +480,7 @@
 				C97FB50918D80615008E29DF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

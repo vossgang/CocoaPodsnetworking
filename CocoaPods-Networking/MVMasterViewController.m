@@ -7,12 +7,13 @@
 //
 
 #import "MVMasterViewController.h"
-
+#import "Song.h"
 #import "MVDetailViewController.h"
 
-@interface MVMasterViewController () {
-    NSMutableArray *_objects;
-}
+@interface MVMasterViewController ()
+
+@property (nonatomic, strong) NSMutableArray *songs;
+
 @end
 
 @implementation MVMasterViewController
@@ -33,6 +34,7 @@
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
     self.detailViewController = (MVDetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
+    [self getSongsFromItunes];
 }
 
 - (void)didReceiveMemoryWarning
@@ -43,10 +45,10 @@
 
 - (void)insertNewObject:(id)sender
 {
-    if (!_objects) {
-        _objects = [[NSMutableArray alloc] init];
+    if (!self.songs) {
+        self.songs = [[NSMutableArray alloc] init];
     }
-    [_objects insertObject:[NSDate date] atIndex:0];
+    [self.songs insertObject:[NSDate date] atIndex:0];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
@@ -60,17 +62,43 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _objects.count;
+    return self.songs.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
 
-    NSDate *object = _objects[indexPath.row];
-    cell.textLabel.text = [object description];
+    Song *song = self.songs[indexPath.row];
+    cell.textLabel.text = song.name;
     return cell;
 }
+
+-(void)getSongsFromItunes
+{
+    
+    NSString *searchURLString = [NSString stringWithFormat:@"https://itunes.apple.com/search?term=blink-182"];
+    
+    NSURL *searchURL = [NSURL URLWithString:searchURLString];
+    
+    NSData *searchData = [NSData dataWithContentsOfURL:searchURL];
+    
+    NSDictionary *searchDict = [NSJSONSerialization JSONObjectWithData:searchData
+                                                               options:NSJSONReadingMutableContainers
+                                                                 error:nil];
+    
+    NSMutableArray *tempSongs = [NSMutableArray new];
+    
+    for (NSDictionary *song in [searchDict objectForKey:@"results"]) {
+        Song *downloadedSong = [[Song alloc] initWithJSON:song];
+        [tempSongs addObject:downloadedSong];
+    }
+    self.songs = tempSongs;
+    [self.tableView reloadData];
+
+    
+}
+
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -81,7 +109,7 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [_objects removeObjectAtIndex:indexPath.row];
+        [self.songs removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
@@ -106,8 +134,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDate *object = _objects[indexPath.row];
-    self.detailViewController.detailItem = object;
+    Song *song= self.songs[indexPath.row];
+    self.detailViewController.song = song;
 }
 
 @end
